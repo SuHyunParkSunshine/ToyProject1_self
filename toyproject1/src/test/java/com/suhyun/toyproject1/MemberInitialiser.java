@@ -20,16 +20,19 @@ public class MemberInitialiser {
     @Test
     public void testDataInsert() {
         memRepo.save(Member.builder()
+                        .id("member12")
                         .username("member")
                         .password(encoder.encode("1234"))
                         .role("ROLE_MEMBER")
                         .enabled(true).build());
         memRepo.save(Member.builder()
+                        .id("manager12")
                         .username("manager")
                         .password(encoder.encode("1234"))
                         .role("ROLE_MANAGER")
                         .enabled(true).build());
         memRepo.save(Member.builder()
+                        .id("admin12")
                         .username("admin")
                         .password(encoder.encode("1234"))
                         .role("ROLE_ADMIN")

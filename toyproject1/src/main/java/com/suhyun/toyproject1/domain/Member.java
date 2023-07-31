@@ -25,10 +25,9 @@ import lombok.ToString;
 @Entity
 public class Member {
     
+    // @GeneratedValue(strategy = GenerationType.IDENTITY) // mysql에서 Auto increment하는 코드
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+    private String id;    
     private String username;
     private String password;
     private String role;

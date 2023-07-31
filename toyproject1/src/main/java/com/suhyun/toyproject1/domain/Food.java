@@ -22,6 +22,7 @@ public class Food {
     
     @Id
     private int id;
+	private String name;
     private String addr_do;
 	private String addr_lot;
 	private String contact;
