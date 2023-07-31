@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.suhyun.toyproject1.config.auth.JWTAuthorizationFilter;
+import com.suhyun.toyproject1.config.filter.JWTAuthenticationFilter;
 import com.suhyun.toyproject1.persistance.MemberRepository;
 
 @Configuration
@@ -29,13 +30,17 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable()); // CSRF 보호 비활성화(JS에서 호출 가능)
         http.cors(cors -> cors.disable()); // CORS 보호 비활성화(React에서 호출 가능) : RestAPI로 호출할 때
 
-        // 웹페이지 접근 권한 설정
         http.authorizeHttpRequests(security -> {
-            security.requestMatchers("/member/**").authenticated()
-                    .requestMatchers("/manager/**").hasAnyRole("MANAGER", "ADMIN")
-                    .requestMatchers("/admin/**").hasRole("ADMIN")
-                    .anyRequest().permitAll();
+            security.anyRequest().permitAll();
         });
+
+        // 웹페이지 접근 권한 설정
+        // http.authorizeHttpRequests(security -> {
+        //     security.requestMatchers("/member/**").authenticated()
+        //             .requestMatchers("/manager/**").hasAnyRole("MANAGER", "ADMIN")
+        //             .requestMatchers("/admin/**").hasRole("ADMIN")
+        //             .anyRequest().permitAll();
+        // });
             //  /member와 하위 주소는 로그인한 사용자는 모두 접근 가능
             //  /manager와 하위 주소는 로그인한 ROLE_MANAGER, ROLE_ADMIN 권한을 가진 사용자만 접근 가능
             //  /admin과 하위 주소는 로그인한 ROLE_ADMIN 권한을 가진 사용자만 접근 가능
